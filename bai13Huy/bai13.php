@@ -57,24 +57,25 @@ $category = array(
 
 
 function sortByCategoryName($listProduct,$listCategory)  { 
-    $arr = array();
+    $array = array();
     for($i = 0; $i < count($listCategory); $i++){
-        for($j = 0; $j < count($listCategory); $j++){
-            if(strcmp($listCategory[$i]->getName(), $listCategory[$j]->getName()) < 0){
-                $tmp = $listCategory[$i];
-                $listCategory[$i] = $listCategory[$j];
-                $listCategory[$j] = $tmp;
-            }
+        $loop = $i;
+        $current = $listCategory[$i];
+
+        while($loop > 0 && strcmp($listCategory[$i - 1]->getName(), $current->getName() < 0)){
+            $listCategory[$loop] = $listCategory[$loop - 1];
+            $loop -= 1;
         }
+        $listCategory[$loop] = $current;
     }
-    for($j= 0 ; $j < count($listCategory) ; $j++)
-        for($i = 0 ; $i<count($listProduct)  -1  ; $i++)       
+    for($i= 0 ; $i < count($listCategory) ; $i++)
+        for($j = 0 ; $j <count($listProduct) -1  ; $j++)       
         {
-            if($listProduct[$i]->getId() == $listCategory[$j]->getId())
+            if($listProduct[$j]->getId() == $listCategory[$i]->getId())
             {
-                $arr[] = $listProduct[$i];
+                $array[] = $listProduct[$j];
             }
         }
-    return $arr;
+    return $array;
 }
 var_dump(sortByCategoryName($product, $category));
