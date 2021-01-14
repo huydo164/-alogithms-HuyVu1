@@ -15,7 +15,7 @@ function calMonth($money,$rate){
 //Có dùng đệ quy
 function calMoney($money,$rate, $month){
     $lai = $rate / 100;
-    if($month  < 1){
+    if($month  == 1){
         return $money;
     }
     else{
